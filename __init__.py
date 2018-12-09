@@ -3,10 +3,9 @@ from os.path import dirname, join
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler, intent_file_handler
 from mycroft.util.log import getLogger
-from mycroft.skills.context import adds_context, removes_context
-from mycroft.util import play_mp3
-
-import random
+from mycroft.util.log import LOG
+from websocket import create_connection, WebSocket
+from time import sleep
 
 _author__ = 'PCWii'
 # Release - 20181027
@@ -22,14 +21,31 @@ class HockeyTimeSkill(MycroftSkill):
     def initialize(self):
         self.load_data_files(dirname(__file__))
 
+    def sendMycroftUtt(self, msg):
+        uri = 'ws://localhost:8181/core'
+        ws = create_connection(uri)
+        utt = '{"context": null, "type": "recognizer_loop:utterance", "data": {"lang": "' \
+              + self.lang + '", "utterances": ["' + msg + '"]}}'
+        ws.send(utt)
+        ws.close()
+
     @intent_handler(IntentBuilder("WatchHockeyIntent").require("WatchKeyword").require("HockeyKeyword").
                     build())
     def handle_watch_hockey_intent(self, message):
-        self.speak_dialog('context', data={"result": "I am Groot!"}, expect_response=True)
-
-    @intent_handler(IntentBuilder('GameOverIntent').require('HockeyKeyword').require('EndedKeyword').build())
-    def handle_game_over_intent(self, message):
-        self.speak_dialog('context', data={"result": "I am Groot"}, expect_response=True)
+        LOG.info('watch hockey intent')
+        self.sendMycroftUtt('turn the room lights off silently')
+        sleep(0.5)
+        self.sendMycroftUtt('turn the tv lights on silently')
+        sleep(0.5)
+        self.sendMycroftUtt('turn the wall lights on silently')
+        sleep(0.5)
+        self.sendMycroftUtt('turn the nanoleaf on silently')
+        sleep(0.5)
+        self.sendMycroftUtt('set the tv lights to blue silently')
+        sleep(0.5)
+        self.sendMycroftUtt('set the wall lights to blue silently')
+        sleep(0.5)
+        self.sendMycroftUtt('set the nanoleaf to toronto hockey game silently')
 
     def stop(self):
         pass
