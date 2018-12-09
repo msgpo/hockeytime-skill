@@ -47,6 +47,18 @@ class HockeyTimeSkill(MycroftSkill):
         sleep(0.5)
         self.sendMycroftUtt('set the nanoleaf to toronto hockey game silently')
 
+    @intent_handler(IntentBuilder("AllLightsOffIntent").require("TurnKeyword").require("LightsKeyword").
+                    require("OffKeyword").build())
+    def handle_all_lights_off_intent(self, message):
+        LOG.info('turn off lights intent')
+        self.sendMycroftUtt('turn the room lights off silently')
+        sleep(0.5)
+        self.sendMycroftUtt('turn the tv lights off silently')
+        sleep(0.5)
+        self.sendMycroftUtt('turn the wall lights off silently')
+        sleep(0.5)
+        self.sendMycroftUtt('turn the nanoleaf off silently')
+
     def stop(self):
         pass
 
