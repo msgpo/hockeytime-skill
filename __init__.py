@@ -34,19 +34,19 @@ class HockeyTimeSkill(MycroftSkill):
     def handle_watch_hockey_intent(self, message):
         LOG.info('watch hockey intent')
         self.sendMycroftUtt('turn the room lights off silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('turn the tv lights on silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('turn the wall lights on silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('turn the nanoleaf on silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('set the tv lights to blue silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('set the wall lights to blue silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('set the nanoleaf to toronto hockey game silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('set the nanoleaf to 15%')
 
     @intent_handler(IntentBuilder("AllLightsOffIntent").require("TurnKeyword").
@@ -54,11 +54,11 @@ class HockeyTimeSkill(MycroftSkill):
     def handle_all_lights_off_intent(self, message):
         LOG.info('turn off lights intent')
         self.sendMycroftUtt('turn the room lights off silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('turn the tv lights off silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('turn the wall lights off silently')
-        sleep(0.5)
+        sleep(0.75)
         self.sendMycroftUtt('turn the nanoleaf off silently')
 
     def stop(self):
