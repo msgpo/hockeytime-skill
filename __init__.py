@@ -6,6 +6,7 @@ from mycroft.util.log import getLogger
 from mycroft.util.log import LOG
 from websocket import create_connection, WebSocket
 from time import sleep
+import random
 
 _author__ = 'PCWii'
 # Release - 20181027
@@ -60,6 +61,16 @@ class HockeyTimeSkill(MycroftSkill):
         self.sendMycroftUtt('turn the wall lights off silently')
         sleep(0.75)
         self.sendMycroftUtt('turn the nanoleaf off silently')
+
+    @intent_handler(IntentBuilder("SomeLightsOnIntent").require("TurnKeyword").
+                    require("SomeKeyword").require("LightsKeyword").require("OnKeyword").build())
+    def handle_some_lights_on_intent(self, message):
+        LOG.info('turn some lights on intent')
+        light_selection = random.randint(1, 3)
+        if (light_selection == 1) or (light_selection == 3):
+            self.sendMycroftUtt('turn the room lights on silently')
+        if (light_selection == 2) or (light_selection == 3):
+            self.sendMycroftUtt('turn the wall lights on silently')
 
     def stop(self):
         pass
