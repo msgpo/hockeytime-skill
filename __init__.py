@@ -34,8 +34,8 @@ class HockeyTimeSkill(MycroftSkill):
                     build())
     def handle_watch_hockey_intent(self, message):
         LOG.info('watch hockey intent')
-        self.sendMycroftUtt('turn the room lights off silently')
-        sleep(0.75)
+        # self.sendMycroftUtt('turn the room lights off silently')
+        # sleep(0.75)
         self.sendMycroftUtt('turn the tv lights on silently')
         sleep(0.75)
         self.sendMycroftUtt('turn the wall lights on silently')
